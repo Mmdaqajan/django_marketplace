@@ -1,4 +1,4 @@
-{% extends 'shared/base..html' %}
+{% extends 'shared/base.html' %}
 
 {% block title %}
 	Home
@@ -12,7 +12,7 @@
         <div class="grid grid-cols-3 gap-3">
             {% for item in items %}
                 <div>
-                    <a href="">
+                    <a href="detail/{{ item.id }}">
                         <div>
                             <img src="{{ item.image.url }}" class="rounded-t-xl " alt="{{ item.name }}">
                         </div>

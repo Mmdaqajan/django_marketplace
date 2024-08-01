@@ -19,12 +19,12 @@ class Category(models.Model):
 
 class Item(models.Model):
     category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
-    name = models.CharField(max_length=225, verbose_name='نام دسته بندی')
+    name = models.CharField(max_length=225, verbose_name='نام کالا')
     url_slug = models.CharField(max_length=80, verbose_name='عنوان در یو ار ال')
     description = models.TextField(null=True, blank=True, verbose_name='توضیحات')
     price = models.FloatField(verbose_name='قیمت')
     image = models.ImageField(upload_to='item_images', null=True, blank=True)
-    is_sold = models.BooleanField(verbose_name='موجود/ناموجود')
+    is_sold = models.BooleanField(verbose_name='فروخته شده؟')
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
 

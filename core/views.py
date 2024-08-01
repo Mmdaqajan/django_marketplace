@@ -1,6 +1,6 @@
 # todo learn how to say mig insteadof 'python manage.py makemigrations'
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from core.models import Item, Category
 
@@ -22,3 +22,13 @@ def contact(request):
     context = {}
     return render(request, 'core/contact.html', context)
 
+
+def detail(request, pk):
+    # item = Item.objects.get_object_or_404(id=pk)
+    item = get_object_or_404(Item, id=pk)
+    related_item = Item.objects.filter(category=item.category, is_sold=False).exclude(pk=pk)
+    context = {
+        'item': item,
+        'related_item': related_item,
+    }
+    return render(request, 'core/detail.html', context)
