@@ -10,8 +10,34 @@
 
         <form action="." method="post">
             {% csrf_token %}
-            {{ sign_up_form.as_p }}
+{#              {{ sign_up_form.as_p }}#}
 
+                <div class="mb-3">
+                    <lable class="inline-block mb-2">Username:</lable>
+                    {{ sign_up_form.username }}
+                </div>
+                  <div class="mb-3">
+                    <lable class="inline-block mb-2">Email:</lable>
+                    {{ sign_up_form.email }}
+                </div>
+                  <div class="mb-3">
+                    <lable class="inline-block mb-2">Password:</lable>
+                    {{ sign_up_form.password1 }}
+                </div>
+                  <div class="mb-3">
+                    <lable class="inline-block mb-2">Confirm Password:</lable>
+                    {{ sign_up_form.password2 }}
+                </div>
+
+                {% if sign_up_form.errors or sign_up_form.non_field_errors %}
+                	<div class="mb-3 p-6 text-lg bg-red-100 rounded-xl">
+                        {% for field in sign_up_form %}
+                            {{ field.errors }}
+                        {% endfor %}
+
+                    {{ sign_up_form.non_field_errors }}
+                    </div>
+                {% endif %}
             <button class="py-6 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
         </form>
 
