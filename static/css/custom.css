@@ -1,0 +1,11 @@
+* {
+  background-color: red !important;
+}
+
+#logoutForm {
+  text-decoration: underline;
+  cursor: auto;
+  display: inline-block;
+  margin-top: 0;
+  padding: 200px;
+}
