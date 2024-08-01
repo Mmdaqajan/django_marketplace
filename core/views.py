@@ -1,7 +1,7 @@
 # todo learn how to say mig insteadof 'python manage.py makemigrations'
 
 from django.shortcuts import render, get_object_or_404
-
+from .forms import SignUpForm
 from core.models import Item, Category
 
 
@@ -32,3 +32,12 @@ def detail(request, pk):
         'related_item': related_item,
     }
     return render(request, 'core/detail.html', context)
+
+
+def signup(request):
+    sign_up_form = SignUpForm()
+    context = {
+        'sign_up_form': sign_up_form,
+    }
+    return render(request, 'core/signup.html', context)
+
