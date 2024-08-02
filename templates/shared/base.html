@@ -13,7 +13,7 @@
         <a href="{% url 'index_page' %}" class="text-xl font-semibold">Puddle</a>
 
         <div class="space-x-6">
-            <a href="" class="text-lg font-semibold hover:text-gray-500">New Item</a>
+            <a href="{% url 'new_item_page' %}" class="text-lg font-semibold hover:text-gray-500">New Item</a>
             <a href="" class="text-lg font-semibold hover:text-gray-500">Brows</a>
 
            {% if request.user.is_authenticated %}

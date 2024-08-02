@@ -24,7 +24,7 @@ class Item(models.Model):
     description = models.TextField(null=True, blank=True, verbose_name='توضیحات')
     price = models.FloatField(verbose_name='قیمت')
     image = models.ImageField(upload_to='item_images', null=True, blank=True)
-    is_sold = models.BooleanField(verbose_name='فروخته شده؟')
+    is_sold = models.BooleanField(default=False ,verbose_name='فروخته شده؟')
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
 

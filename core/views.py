@@ -1,8 +1,8 @@
 # todo learn how to say mig insteadof 'python manage.py makemigrations'
-
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .forms import SignUpForm, LoginFrom
+from .forms import SignUpForm, LoginFrom, NewItemForm
 from core.models import Item, Category
 
 
@@ -50,4 +50,24 @@ def signup(request):
     return render(request, 'core/signup.html', context)
 
 
+@login_required
+def new(request):
+    if request.method == 'POST':
+        form = NewItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            item = form.save(commit=False)
+            # this commit=False makes change not to save in database cause the created by field is empty
+            # we should fill it then save item into database
+            item.created_by = request.user
+            item.save()
+            return redirect('detail_page', pk=item.id)
+    else:
+        form = NewItemForm()
+
+    return render(request, 'core/new_item.html', {
+        'form': form,
+    })
+
 # todo learn how to logout via django internal function
+
+
