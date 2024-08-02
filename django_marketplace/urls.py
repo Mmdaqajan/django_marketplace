@@ -5,13 +5,14 @@ from django.conf import settings
 
 from django.contrib import admin
 from django.urls import path, include
-from core.views import index, detail, signup, new, delete, edit
+from core.views import index, detail, signup, new, delete, edit, browse
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from core.forms import LoginFrom
 
 urlpatterns = [
     path('', index, name='index_page'),
+    path('browse/', browse, name='browse_page'),
     path('dashboard', include('dashboard.urls'), name='dashboard'),
     path('contact/', index, name='contact_page'),
     path('signup/', signup, name='signup_page'),
@@ -23,3 +24,4 @@ urlpatterns = [
     path('detail/<int:pk>/', detail, name='detail_page'),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

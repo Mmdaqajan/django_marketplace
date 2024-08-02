@@ -5,7 +5,6 @@ from django.urls import reverse
 from .forms import SignUpForm, LoginFrom, NewItemForm, EditItemForm
 from core.models import Item, Category
 
-
 # Create your views here.
 
 
@@ -95,5 +94,12 @@ def edit(request, pk):
         'title': 'Edit Item'
     })
 
+
+def browse(request):
+    items = Item.objects.filter(is_sold=False)
+
+    return render(request, 'core/brows.html', {
+        'items': items,
+    })
 
 # todo learn how to logout via django internal function
