@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     # internal
     'core',
     'dashboard',
+    'conversation',
 ]
 
 MIDDLEWARE = [
