@@ -13,7 +13,8 @@ from core.forms import LoginFrom
 urlpatterns = [
     path('', index, name='index_page'),
     path('browse/', browse, name='browse_page'),
-    path('dashboard', include('dashboard.urls'), name='dashboard'),
+    path('dashboard', include('dashboard.urls')),
+    path('inbox/', include('conversation.urls')),
     path('contact/', index, name='contact_page'),
     path('signup/', signup, name='signup_page'),
     path('new-item/', new, name='new_item_page'),

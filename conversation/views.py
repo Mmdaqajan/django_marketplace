@@ -1,15 +1,19 @@
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, get_object_or_404, redirect
-from conversation.forms import ConversationMessageForm
-from conversation.models import Conversation
+from .forms import ConversationMessageForm
+from .models import Conversation
 from core.models import Item
 
 
+@login_required
 def new_conversation(request, item_pk):
-    item = get_object_or_404(Item, item_pk)
-    conversations = Conversation.objects.filter(item=item).filter(members__in=request.user.id)
+    item = get_object_or_404(Item, pk=item_pk)
 
     if item.created_by == request.user:
         return redirect('dashboard:index_page')
+
+    conversations = Conversation.objects.filter(item=item).filter(members__in=[request.user.id])
 
     if conversations:
         pass
@@ -33,8 +37,16 @@ def new_conversation(request, item_pk):
     else:
         form = ConversationMessageForm()
 
-    return render(request, '', {
+    return render(request, 'conversation/new.html', {
         'conversations': conversations,
-        'form': form
+        'form': form,
+    })
+
+
+@login_required()
+def inbox(request):
+    conversations = Conversation.objects.filter(members__in=[request.user.id])
+    return render(request, 'conversation/inbox.html', {
+        'conversations': conversations,
     })
 
